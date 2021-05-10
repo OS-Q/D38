@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - pio
 
 jobs:
   CodeCheck:
@@ -66,7 +66,6 @@ jobs:
           - "simple-echo"
           - "doppler_speed"
 
-        package: ["pio","qio"]
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -80,17 +79,10 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install qio
-        if: matrix.package == 'qio'
-        run: |
-          pip install platformio
-          pio platform install https://github.com/OS-Q/P245/archive/master.zip
-
-      - name: Install pio
-        if: matrix.package == 'pio'
+      - name: Install
         run: |
           pip install -U https://github.com/platformio/platformio/archive/develop.zip
-          pio platform install https://github.com/OS-Q/P245/archive/master.zip
+          pio platform install https://github.com/OS-Q/P245/archive/pio.zip
 
       - name: Build examples
         run: |
