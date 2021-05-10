@@ -93,7 +93,6 @@ jobs:
           pio platform install https://github.com/OS-Q/P245/archive/master.zip
 
       - name: Build examples
-        working-directory: examples
         run: |
           pio run -d ${{ matrix.example }}
 
