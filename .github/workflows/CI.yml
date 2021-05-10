@@ -66,9 +66,8 @@ jobs:
           - "simple-echo"
           - "doppler_speed"
 
-        package: ["pio","qio"]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+        package: ["pio","qio","all"]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -84,12 +83,18 @@ jobs:
         if: matrix.package == 'qio'
         run: |
           pip install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
-          pio platform install https://github.com/OS-Q/P245/archive/master.zip
+          pio platform install https://github.com/OS-Q/P245/archive/qio.zip
 
       - name: Install pio
         if: matrix.package == 'pio'
         run: |
           pip install -U https://github.com/platformio/platformio/archive/develop.zip
+          pio platform install https://github.com/OS-Q/P245/archive/pio.zip
+
+      - name: Install all
+        if: matrix.package == 'all'
+        run: |
+          pip install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
           pio platform install https://github.com/OS-Q/P245/archive/master.zip
 
       - name: Build examples
