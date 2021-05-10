@@ -83,7 +83,7 @@ jobs:
       - name: Install qio
         if: matrix.package == 'qio'
         run: |
-          pip install platformio
+          pip install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
           pio platform install https://github.com/OS-Q/P245/archive/master.zip
 
       - name: Install pio
